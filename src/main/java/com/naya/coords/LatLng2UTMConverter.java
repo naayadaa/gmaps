@@ -1,5 +1,8 @@
-package com.naya;
+package com.naya.coords;
 
+
+import com.naya.coords.LatLng;
+import com.naya.coords.UTMcoord;
 
 /**
  * Created by naayadaa on 17.08.16.
@@ -83,8 +86,8 @@ public class LatLng2UTMConverter {
         double easting = getEasting();
         double northing = getNorthing(latitude);
 
-        UTM = longZone + " " + latZone + " " + ((int) easting) + " "
-                + ((int) northing);
+        /*UTM = longZone + " " + latZone + " " + ((int) easting) + " "
+                + ((int) northing);*/
         // UTM = longZone + " " + latZone + " " + decimalFormat.format(_easting) +
         // " "+ decimalFormat.format(_northing);
 
@@ -140,7 +143,7 @@ public class LatLng2UTMConverter {
 
     protected int getLongZone(double longitude)
     {
-        double longZone = 0;
+        double longZone;
         if (longitude < 0.0)
         {
             longZone = ((180.0 + longitude) / 6) + 1;
@@ -150,10 +153,7 @@ public class LatLng2UTMConverter {
             longZone = (longitude / 6) + 31;
         }
         String val = String.valueOf((int) longZone);
-        if (val.length() == 1)
-        {
-            val = "0" + val;
-        }
+
         return (int)longZone;
     }
 

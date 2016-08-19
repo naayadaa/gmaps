@@ -1,5 +1,8 @@
-package com.naya;
+package com.naya.coords;
 
+
+import com.naya.coords.LatLng;
+import com.naya.coords.UTMcoord;
 
 /**
  * Created by naayadaa on 17.08.16.

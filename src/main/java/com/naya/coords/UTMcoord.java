@@ -1,4 +1,4 @@
-package com.naya;
+package com.naya.coords;
 
 
 /**
@@ -13,6 +13,11 @@ public class UTMcoord {
 
     private String southernHemisphere = "ACDEFGHJKLM";
 
+    private static final UTM2LatLngConverter converter = new UTM2LatLngConverter();
+
+    public static UTMcoord getZero(){
+        return new LatLng(0., 0.).toUTM();
+    }
     public UTMcoord(int utmZone, String utmLatZone, double easting, double northing) {
         this.utmZone = utmZone;
         this.utmLatZone = utmLatZone;
@@ -23,7 +28,7 @@ public class UTMcoord {
     public String getHemisphere()
     {
         String hemisphere = "N";
-        if (southernHemisphere.indexOf(utmLatZone) > -1)
+        if (southernHemisphere.contains(utmLatZone))
         {
             hemisphere = "S";
         }
@@ -46,9 +51,24 @@ public class UTMcoord {
         return northing;
     }
 
+    public LatLng toLatLng(){
+        return converter.convert(this);
+    }
+
+    public boolean isZero(){
+        LatLng latLng = this.toLatLng();
+        return latLng.getLat().equals(0.) && latLng.getLng().equals(0.);
+    }
+
     @Override
     public String toString() {
         return utmZone + utmLatZone + " " +
                 easting.intValue() + " " + northing.intValue();
     }
+
+    public double getDistance(UTMcoord newUTMcoord) {
+        return Math.sqrt(Math.pow(Math.abs(easting - newUTMcoord.getEasting()), 2) +
+                Math.pow(Math.abs(northing - newUTMcoord.getNorthing()), 2));
+    }
+
 }
