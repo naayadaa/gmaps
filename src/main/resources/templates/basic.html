@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <title>GMaps.js &mdash; Basic</title>
@@ -82,9 +82,18 @@
   lat: -12.043333,
   lng: -77.028333
 });</pre>
-      <p>You must define <strong>container ID</strong>, <strong>latitude</strong> and <strong>longitude</strong> of the map's center.</p>
-      <p><span class="label notice">Note: </span>You also can define <strong>zoom</strong>, <strong>width</strong> and <strong>height</strong>. By default, zoom is 15. Width and height in a CSS class will replace these values.</p>
-    </div>
+      <form th:action="@{/}" method="post">
+        <div><label> spacing: <input type="number" name="spacing"/> </label></div>
+        <div><label> angle: <input type="number" name="angle"/> </label></div>
+        <div><label> overshoot1: <input type="number" name="overshoot1"/> </label></div>
+        <div><label> overshoot2: <input type="number" name="overshoot2"/> </label></div>
+        <div><label> altitude: <input type="number" name="altitude"/> </label></div>
+        <div><label> minLaneSeparation: <input type="number" name="minLaneSeparation"/> </label></div>
+        <div><label> leadin: <input type="number" name="leadin"/> </label></div>
+
+        <input type="submit" value="Draw a polygon" />
+      </form>
+       </div>
   </div>
 </body>
 </html>

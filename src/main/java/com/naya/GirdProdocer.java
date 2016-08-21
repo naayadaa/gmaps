@@ -53,7 +53,7 @@ public class GirdProdocer {
 
     public static List<PointLatLngAlt> createGird(List<PointLatLngAlt> polygon, double altitude, double distance,
                                                   double spacing, double angle, double overshoot1, double overshoot2,
-                                                  StartPosition startPosition, boolean shutter, double minLaneSeparation, double leadin){
+                                                  LatLng startLatLng, boolean shutter, double minLaneSeparation, double leadin){
         if (spacing < 4 && spacing != 0)
             spacing = 4;
         if (distance < 0.1)
@@ -224,9 +224,9 @@ public class GirdProdocer {
         if(grid.size() == 0)
             return ans;
 
-        UTMcoord startUTMcoord;
+        UTMcoord startUTMcoord = startLatLng.toUTM();
 
-        switch (startPosition){
+       /* switch (startPosition){
             default:
             case HOME:
                 startUTMcoord = UTMcoord.getZero(); //get home from geolacation!!!
@@ -240,7 +240,7 @@ public class GirdProdocer {
             case POINT:
                 startUTMcoord = startPointLatLngAlt.getLatLng().toUTM();
                 break;
-        }
+        }*/
 
         // find closest line point to startpos
         LineLatLng closest = findClosestLine(startUTMcoord, grid, 0
